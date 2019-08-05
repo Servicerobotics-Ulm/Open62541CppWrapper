@@ -1,6 +1,17 @@
 # This is the Open62541CppWrapper Library
 
-This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significally simplify usage of a simple client and a simple server, includig creating the server-node-space, setting calling call-back class members when variables change values, and simplifying the usage of remote OPC UA method calls.
+This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significally simplify the implementation of a simple client and a simple server, includig the creation of the server-node-space, the initiation of call-back class-member methods when OPC UA variables change their values, and simplifies the usage of remote OPC UA method calls.
+
+Currently supported features:
+* Scope-based auto-cleanup and efficient move-semantics for **UA_Variant** and **UA_NodeId**
+* Array support for **UA_Variant**
+* Creation of node-space for **UA_Server** and **UA_Client**
+* Connection of a **UA_Client** to a remote server
+* Asynchronous triggering of a **callback** method implemented as a class member method
+* Connection of a class-member method with an **OPC UA remote method** call
+ 
+Not yet implemented features:
+* **Automatic discovery** of remote servers based on a simple name (currently an OPC UA address has to be provided at the client to connect to a server)
 
 ## Dependencies
 
