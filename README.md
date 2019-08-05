@@ -55,7 +55,7 @@ $ sudo make install
 
 This step assumes that you have built and installed the **open62541** base library as described above. The following instructions have been tested on **Ubuntu 18.04 x64**.
 
-First, you have to clone this repository to your local comuter. To do so, open a new terminal an execute this comman:
+First, you have to clone this repository to your local comuter. To do so, open a new terminal an execute this command:
 
 ```sh
 $ git clone https://github.com/Servicerobotics-Ulm/Open62541CppWrapper.git
@@ -74,7 +74,7 @@ $ sudo make install
 
 ## Testing the built-in SimpleServer and SimpleClient examples
 
-The Open62541CppWrapper library comes with two default test examples, that you can try out and investigate the code. The examples are automatcially built within the main build process as described in the preceding section. You can execute the tow examples as follows.
+The Open62541CppWrapper library comes with two default test examples, that you can try out and investigate the code. The examples are automatcially built as part of the main build process (described in the preceding section). You can execute the two examples as follows.
 
 1. Open a new bash terminal (or use the terminal from the build process above) and go to the location where you have compiled the Open62541CppWrapper.
 
@@ -100,14 +100,14 @@ Depending on the current configuration of your Linux installation, you might get
 
 This is not an error of the library itself but is a problem of your Linux configuration that can be solved in various ways, and two preferred solutions are described next.
 
-First of all, the cause for this problem is that the default system location **/usr/local/lib** is not configured in your system as a default run-time path where libraries are searched. A temporal solution to check whether this is indeed the error is just to set the LD_LIBRARY_PATH as follows:
+First of all, the cause for this problem is that the default system location **/usr/local/lib** is not configured in your system as a default run-time path where libraries are searched. A temporal solution to check whether this is indeed the case is by setting the LD_LIBRARY_PATH as follows:
 
 ```sh
 $ export LD_LIBRARY_PATH=/usr/local/lib/
 $ ./SimpleServer
 ```
 
-Please note that this does not modify the actual configuration of your Linux installation, but only locally changes the run-time path and you have to repeat this step each time you open a new terminal. A more permanent and recommended solution is to properly update your Linux' ld configuration as follows (you will need super user access rights):
+Please note that this does not modify the actual configuration of your Linux installation, but only locally changes the run-time path and you have to repeat this step each time you open a new terminal. A more permanent and the recommended solution is to properly update your Linux' ld configuration as follows (you will need super-user access rights):
 
 ```sh
 $ sudo su
