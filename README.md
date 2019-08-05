@@ -1,6 +1,6 @@
 # This is the Open62541CppWrapper Library
 
-This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/).
+This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significally simplify usage of a simple client and a simple server, includig creating the server-node-space, setting calling call-back class members when variables change values, and simplifying the usage of remote OPC UA method calls.
 
 ## Dependencies
 
