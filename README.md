@@ -7,7 +7,6 @@ This repository provides a lightweight C++ wrapper around the [open62541 C libra
 The Open62541CppWrapper mainly requires a preinstalled [open62541 C library](https://open62541.org/) in addition to a defaul C++ build infrastructure as listed next:
 
 * [**open62541**](https://open62541.org/): currently tested with version [**1.0**](https://github.com/open62541/open62541/tree/1.0) (follow build instructions below)
-  ** tested with commit in master branch 755abcfc54f5c7f438d0e1dee91370df28e6c02e
 * [**CMake**](https://cmake.org/) min. version **3.5**
 * A C++ compiler supporting the **C++ 14** standard
 * The [C++ **Standard Library** (STD)](https://en.cppreference.com/w/cpp/header)
