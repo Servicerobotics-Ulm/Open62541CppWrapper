@@ -182,6 +182,13 @@ public:
 	 *  @return 0 if everything was fine or -1 otherwise
 	 */
 	int run();
+
+	/** this method signals the server's internal run-loop to stop
+	 *
+	 *  The method run blocks indefinitely until either a CTR+C is pressed or
+	 *  this method is called.
+	 */
+	void signalStop();
 };
 
 } /* namespace OPCUA */

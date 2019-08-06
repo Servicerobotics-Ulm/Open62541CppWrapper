@@ -149,6 +149,7 @@ GenericServer::GenericServer(const std::string &rootObjectName, const unsigned s
 GenericServer::~GenericServer()
 {
 	#ifdef HAS_OPCUA
+	signalStop();
 	// cleanup server resources
 	UA_Server_delete(server);
 	#endif // HAS_OPCUA
@@ -178,6 +179,10 @@ int GenericServer::run() {
 	}
 	#endif // HAS_OPCUA
 	return -1;
+}
+
+void GenericServer::signalStop() {
+	running = false;
 }
 
 bool GenericServer::createRootObject(const std::string &objectName, const unsigned short &namespaceId)
