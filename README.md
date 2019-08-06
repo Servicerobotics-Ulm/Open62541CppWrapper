@@ -1,13 +1,23 @@
 # This is the Open62541CppWrapper Library
 
-This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/).
+This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significally simplify the implementation of a simple client and a simple server, includig the creation of the server-node-space, the initiation of call-back class-member methods when OPC UA variables change their values, and simplifies the usage of remote OPC UA method calls.
+
+Currently supported features:
+* Scope-based auto-cleanup and efficient move-semantics for **UA_Variant** and **UA_NodeId**
+* Array support for **UA_Variant**
+* Creation of node-space for **UA_Server** and **UA_Client**
+* Connection of a **UA_Client** to a remote server
+* Asynchronous triggering of a **callback** method implemented as a class member method
+* Connection of a class-member method with an **OPC UA remote method** call
+ 
+Not yet implemented features:
+* **Automatic discovery** of remote servers based on a simple name (currently an OPC UA address has to be provided at the client to connect to a server)
 
 ## Dependencies
 
 The Open62541CppWrapper mainly requires a preinstalled [open62541 C library](https://open62541.org/) in addition to a defaul C++ build infrastructure as listed next:
 
 * [**open62541**](https://open62541.org/): currently tested with version [**1.0**](https://github.com/open62541/open62541/tree/1.0) (follow build instructions below)
-  ** tested with commit in master branch 755abcfc54f5c7f438d0e1dee91370df28e6c02e
 * [**CMake**](https://cmake.org/) min. version **3.5**
 * A C++ compiler supporting the **C++ 14** standard
 * The [C++ **Standard Library** (STD)](https://en.cppreference.com/w/cpp/header)
@@ -56,7 +66,7 @@ $ sudo make install
 
 This step assumes that you have built and installed the **open62541** base library as described above. The following instructions have been tested on **Ubuntu 18.04 x64**.
 
-First, you have to clone this repository to your local comuter. To do so, open a new terminal an execute this comman:
+First, you have to clone this repository to your local comuter. To do so, open a new terminal an execute this command:
 
 ```sh
 $ git clone https://github.com/Servicerobotics-Ulm/Open62541CppWrapper.git
@@ -75,7 +85,7 @@ $ sudo make install
 
 ## Testing the built-in SimpleServer and SimpleClient examples
 
-The Open62541CppWrapper library comes with two default test examples, that you can try out and investigate the code. The examples are automatcially built within the main build process as described in the preceding section. You can execute the tow examples as follows.
+The Open62541CppWrapper library comes with two default test examples, that you can try out and investigate the code. The examples are automatcially built as part of the main build process (described in the preceding section). You can execute the two examples as follows.
 
 1. Open a new bash terminal (or use the terminal from the build process above) and go to the location where you have compiled the Open62541CppWrapper.
 
@@ -101,14 +111,14 @@ Depending on the current configuration of your Linux installation, you might get
 
 This is not an error of the library itself but is a problem of your Linux configuration that can be solved in various ways, and two preferred solutions are described next.
 
-First of all, the cause for this problem is that the default system location **/usr/local/lib** is not configured in your system as a default run-time path where libraries are searched. A temporal solution to check whether this is indeed the error is just to set the LD_LIBRARY_PATH as follows:
+First of all, the cause for this problem is that the default system location **/usr/local/lib** is not configured in your system as a default run-time path where libraries are searched. A temporal solution to check whether this is indeed the case is by setting the LD_LIBRARY_PATH as follows:
 
 ```sh
 $ export LD_LIBRARY_PATH=/usr/local/lib/
 $ ./SimpleServer
 ```
 
-Please note that this does not modify the actual configuration of your Linux installation, but only locally changes the run-time path and you have to repeat this step each time you open a new terminal. A more permanent and recommended solution is to properly update your Linux' ld configuration as follows (you will need super user access rights):
+Please note that this does not modify the actual configuration of your Linux installation, but only locally changes the run-time path and you have to repeat this step each time you open a new terminal. A more permanent and the recommended solution is to properly update your Linux' ld configuration as follows (you will need super-user access rights):
 
 ```sh
 $ sudo su
