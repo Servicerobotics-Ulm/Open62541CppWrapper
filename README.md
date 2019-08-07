@@ -35,6 +35,7 @@ The following instructions have been tested on **Ubuntu 18.04 x64**. In case you
 ```sh
 $ sudo apt-get install git build-essential g++ pkg-config cmake python python-six
 ```
+![IMG01](images/01.png)
 
 Now you can clone the **open62541** base library by executing the following commands in a bash terminal (you can use any base folder of your choice):
 
