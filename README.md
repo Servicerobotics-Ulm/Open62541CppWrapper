@@ -87,6 +87,9 @@ $ cmake ..
 $ make
 $ sudo make install
 ```
+![IMG06](images/06.png)
+
+![IMG07](images/07.png)
 
 ## Testing the built-in SimpleServer and SimpleClient examples
 
@@ -98,6 +101,10 @@ The Open62541CppWrapper library comes with two default test-examples, that you c
 $ cd build/examples/SimpleServer
 $ ./SimpleServer
 ```
+![IMG08](images/08.png)
+
+This server can be accessed by any OPCUA client.
+![IMG09](images/09.png)
 
 2. Open a new bash terminal and go to the location where you have compiled the Open62541CppWrapper.
 
@@ -105,6 +112,9 @@ $ ./SimpleServer
 $ cd build/examples/SimpleClient
 $ ./SimpleClient
 ```
+![IMG10](images/10.png)
+
+![IMG11](images/11.png)
 
 ### Troubleshooting when getting the runtime "error while loading shared libraries: libopen62541.so.0"
 
