@@ -46,6 +46,7 @@ $ git checkout 1.0
 $ git submodule init
 $ git submodule update
 ```
+![IMG02](images/02.png)
 
 For building the **open62541** base library, we use CMake and set some library-specific CMake options. Here are the relevant CMake options:
 
@@ -62,6 +63,9 @@ $ cmake -DUA_BUILD_EXAMPLES=ON -DUA_ENABLE_DISCOVERY_MULTICAST=ON -DBUILD_SHARED
 $ make
 $ sudo make install
 ```
+![IMG03](images/03.png)
+
+![IMG04](images/04.png)
 
 ## Build instructions for the Open62541CppWrapper library
 
