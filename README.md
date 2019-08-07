@@ -90,14 +90,14 @@ The Open62541CppWrapper library comes with two default test-examples, that you c
 1. Open a new bash terminal (or use the terminal from the build process above) and go to the location where you have compiled the Open62541CppWrapper.
 
 ```sh
-$ cd build/examles/SimpleServer
+$ cd build/examples/SimpleServer
 $ ./SimpleServer
 ```
 
 2. Open a new bash terminal and go to the location where you have compiled the Open62541CppWrapper.
 
 ```sh
-$ cd build/examles/SimpleClient
+$ cd build/examples/SimpleClient
 $ ./SimpleClient
 ```
 
