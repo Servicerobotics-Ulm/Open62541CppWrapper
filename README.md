@@ -103,7 +103,7 @@ $ ./SimpleServer
 ```
 ![IMG08](images/08.png)
 
-This server can be accessed by any OPCUA client.
+This server can be accessed by any OPC UA client.
 ![IMG09](images/09.png)
 
 2. Open a new bash terminal and go to the location where you have compiled the Open62541CppWrapper.
