@@ -1,6 +1,6 @@
 # This is the Open62541CppWrapper Library
 
-This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significally simplify the implementation of a simple client and a simple server, includig the creation of the server-node-space, the initiation of call-back class-member methods when OPC UA variables change their values, and simplifies the usage of remote OPC UA method calls.
+This repository provides a lightweight C++ wrapper around the [open62541 C library](https://open62541.org/). The main goal of this C++ wrapper is to implement modern memory management (with proper destructors) for the generic UPC UA types such as **UA_Variant** and **UA_NodeId**. Moreover, this library provides two generic classes **GenericServer** and **GenericClient** that offer a simple and coherent interface for the common **UA_Server** and respectively **UA_Client** methods of the original open62541 C library. These two classes also significantly simplify the implementation of a simple client and a simple server, including the creation of the server-node-space, the initiation of call-back class-member methods when OPC UA variables change their values and simplify the usage of remote OPC UA method calls.
 
 Currently supported features:
 * Scope-based auto-cleanup and efficient move-semantics for **UA_Variant** and **UA_NodeId**
@@ -28,15 +28,16 @@ Most recent and detailed instructions for building the **open62541** base librar
 
 * [https://open62541.org/doc/current/building.html](https://open62541.org/doc/current/building.html)
 
-The relevant parts for building the **open62541** base library as required for the **Open62541CppWrapper** library are summarized next. Please note, that the build instructions might become outdated when the original library evolves, so we recomment checking the original documentation in case of problems.
+The relevant parts for building the **open62541** base library as required for the **Open62541CppWrapper** library are summarized next. Please note, that the build instructions might become outdated when the original library evolves, so we recommend checking the original documentation in case of problems.
 
 The following instructions have been tested on **Ubuntu 18.04 x64**. In case you don't yet have installed the standard C++ build packages, you can do so by executing the following command in a bash terminal:
 
 ```sh
 $ sudo apt-get install git build-essential g++ pkg-config cmake python python-six
 ```
+![IMG01](images/01.png)
 
-Now you can clone the **open62541** base library by by executing the following commands in a bash terminal (you can use any base folder of your choice):
+Now you can clone the **open62541** base library by executing the following commands in a bash terminal (you can use any base folder of your choice):
 
 ```sh
 $ git clone https://github.com/open62541/open62541.git
@@ -45,6 +46,7 @@ $ git checkout 1.0
 $ git submodule init
 $ git submodule update
 ```
+![IMG02](images/02.png)
 
 For building the **open62541** base library, we use CMake and set some library-specific CMake options. Here are the relevant CMake options:
 
@@ -61,12 +63,15 @@ $ cmake -DUA_BUILD_EXAMPLES=ON -DUA_ENABLE_DISCOVERY_MULTICAST=ON -DBUILD_SHARED
 $ make
 $ sudo make install
 ```
+![IMG03](images/03.png)
 
-## Build instructions for the actual Open62541CppWrapper library
+![IMG04](images/04.png)
+
+## Build instructions for the Open62541CppWrapper library
 
 This step assumes that you have built and installed the **open62541** base library as described above. The following instructions have been tested on **Ubuntu 18.04 x64**.
 
-First, you have to clone this repository to your local comuter. To do so, open a new terminal an execute this command:
+First, you have to clone this repository to your local computer. To do so, open a new terminal an execute this command:
 
 ```sh
 $ git clone https://github.com/Servicerobotics-Ulm/Open62541CppWrapper.git
@@ -82,24 +87,34 @@ $ cmake ..
 $ make
 $ sudo make install
 ```
+![IMG06](images/06.png)
+
+![IMG07](images/07.png)
 
 ## Testing the built-in SimpleServer and SimpleClient examples
 
-The Open62541CppWrapper library comes with two default test examples, that you can try out and investigate the code. The examples are automatcially built as part of the main build process (described in the preceding section). You can execute the two examples as follows.
+The Open62541CppWrapper library comes with two default test-examples, that you can try out and investigate the code. The examples are automatically built as part of the main build process (described in the preceding section). You can execute the two examples as follows.
 
 1. Open a new bash terminal (or use the terminal from the build process above) and go to the location where you have compiled the Open62541CppWrapper.
 
 ```sh
-$ cd build/examles/SimpleServer
+$ cd build/examples/SimpleServer
 $ ./SimpleServer
 ```
+![IMG08](images/08.png)
+
+This server can be accessed by any OPC UA client.
+![IMG09](images/09.png)
 
 2. Open a new bash terminal and go to the location where you have compiled the Open62541CppWrapper.
 
 ```sh
-$ cd build/examles/SimpleClient
+$ cd build/examples/SimpleClient
 $ ./SimpleClient
 ```
+![IMG10](images/10.png)
+
+![IMG11](images/11.png)
 
 ### Troubleshooting when getting the runtime "error while loading shared libraries: libopen62541.so.0"
 
@@ -127,6 +142,6 @@ $ ldconfig
 $ exit
 ```
 
-This will add the **/usr/local/lib** as a default run-time path in you Linux system and you don't have to worry about it anymore for your future uses.
+This will add the **/usr/local/lib** as a default run-time path in your Linux system and you don't have to worry about it anymore for your future uses.
 
 
