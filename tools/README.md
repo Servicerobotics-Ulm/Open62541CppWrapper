@@ -74,7 +74,7 @@ The XML compiler creates a new local folder named "output_TrafficlightNS". The o
 For building the C++ code, we assume that you have built and installed the Open62541CppWrapper library (see parent [README](../README.md) file). To build the generated C++ code, open a new terminal and type in the following commands:
 
 ```sh
-& cd output_TrafficlightNS
+$ cd output_TrafficlightNS
 $ mkdir -p build
 $ cd build
 $ cmake ..
