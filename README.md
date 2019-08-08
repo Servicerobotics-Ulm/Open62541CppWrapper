@@ -103,7 +103,7 @@ $ ./SimpleServer
 ```
 ![IMG08](images/08.png)
 
-This server can be accessed by any OPC UA client.
+This server can be accessed by any OPC UA client (we use the [Prosys OPC UA Client](https://www.prosysopc.com/products/opc-ua-client) as an example).
 ![IMG09](images/09.png)
 
 2. Open a new bash terminal and go to the location where you have compiled the Open62541CppWrapper.
