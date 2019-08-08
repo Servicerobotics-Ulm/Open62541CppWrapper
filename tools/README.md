@@ -35,6 +35,7 @@ You can install OpenJDK 8 in Ubuntu by opening a new bash terminal and copy-past
 ```sh
 $ sudo apt-get install openjdk-8-jre
 ```
+![IMGT1](images/T1.png)
 
 Dependencies for compiling the generated C++ code:
 
@@ -75,6 +76,9 @@ $ cd build
 $ cmake ..
 $ make
 ```
+![IMGT2](images/T2.png)
+
+![IMGT3](images/T3.png)
 
 The generated C++ code fully initializes the OPC UA client/server part which can even be executed already. However, the OPC UA client/server is not yet doing anything useful as the related business logic is missing, and has to be added. Yet, the built server (and client respectively) can be executed as follows:
 
@@ -82,5 +86,9 @@ The generated C++ code fully initializes the OPC UA client/server part which can
 $ cd src-gen/server
 $ ./MyRootObjectServerTest
 ```
+![IMGT4](images/T4.png)
+
+This server can be accessed by any OPC UA client. 
+![IMGT5](images/T5.png)
 
 Please note, that the name of the executable server is constructed from the Root Object name specified in the XML file and the postfix "ServerTest". The business logic can be added by implementing the two pre-generated C++ classes named e.g. like this: MyRootObjectDriverModel and MyRootObjectController.
