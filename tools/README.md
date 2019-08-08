@@ -90,9 +90,10 @@ $ ./TrafficlightServerTest
 ```
 ![IMGT4](images/T4.png)
 
-Please note, that the name of the executable is constructed from the Root-Object name specified in the XML file and the postfix "ServerTest". In our example, this amounts to "TrafficlightServerTest".
+Please note, that the name of the executable is constructed from the Root-Object name specified in the XML file and the suffix "ServerTest". In our example, this amounts to "TrafficlightServerTest".
 
-This server can be accessed by any OPC UA client (we use the [Prosys OPC UA Client](https://www.prosysopc.com/products/opc-ua-client) as an example). 
+This server can be accessed by any OPC UA client (we use the [Prosys OPC UA Client](https://www.prosysopc.com/products/opc-ua-client) as an example).
+
 ![IMGT5](images/T5.png)
 
-The business logic can be added by implementing the two pre-generated C++ classes with the suffix "DriverModel" and "Controller". In our examples, the two classes are "TrafficlightDriverModel" and "TrafficlightController". The DriverModel is completely indepndent of any OPC UA code and is supposed to implement the platform-specific driver code. The Controller is the glue class that manages the interaction between the OPC UA server and the DriverModel.
+The business logic can be added by implementing the two pre-generated C++ classes with the suffix "DriverModel" and "Controller". In our examples, the two classes are "TrafficlightDriverModel" and "TrafficlightController". The DriverModel is completely indepndent of any OPC UA code and is supposed to implement the platform-specific driver logic. The Controller is the glue class that manages the interaction between the OPC UA server and the DriverModel.
