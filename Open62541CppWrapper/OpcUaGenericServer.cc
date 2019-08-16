@@ -329,11 +329,12 @@ bool GenericServer::addMethodNode(const std::string &methodBrowseName,
 
 		if(output->second.isScalar()) {
 			// scalar type
-			uaOutputArguments[i].valueRank = -1;
+			uaOutputArguments[i].valueRank = UA_VALUERANK_SCALAR;
 		} else {
 			// setup the array dimensions
-			uaOutputArguments[i].valueRank = 1;
+			uaOutputArguments[i].valueRank = UA_VALUERANK_ONE_DIMENSION;
 			uaOutputArguments[i].arrayDimensionsSize = valuePtr->arrayDimensionsSize;
+			uaOutputArguments[i].arrayDimensions = UA_UInt32_new();
 			UA_UInt32_copy(valuePtr->arrayDimensions, uaOutputArguments[i].arrayDimensions);
 		}
 
