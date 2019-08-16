@@ -301,11 +301,12 @@ bool GenericServer::addMethodNode(const std::string &methodBrowseName,
 
 		if(input->second.isScalar()) {
 			// scalar type
-			uaInputArguments[i].valueRank = -1;
+			uaInputArguments[i].valueRank = UA_VALUERANK_SCALAR;
 		} else {
 			// setup the array dimensions
-			uaInputArguments[i].valueRank = 1;
+			uaInputArguments[i].valueRank = UA_VALUERANK_ONE_DIMENSION;
 			uaInputArguments[i].arrayDimensionsSize = valuePtr->arrayDimensionsSize;
+			uaInputArguments[i].arrayDimensions = UA_UInt32_new();
 			UA_UInt32_copy(valuePtr->arrayDimensions, uaInputArguments[i].arrayDimensions);
 		}
 

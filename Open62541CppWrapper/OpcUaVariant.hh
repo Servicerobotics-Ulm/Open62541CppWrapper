@@ -187,9 +187,12 @@ inline SIMPLE_VALUE_TYPE Variant::getValueAs() const
 template <>
 inline std::vector<std::string> Variant::getArrayValuesAs() const
 {
-	if(isScalar() || isEmpty()) {
+	if(isEmpty()) {
 		return std::vector<std::string>();
+	} else if(isScalar()) {
+		return std::vector<std::string>(1, toString());
 	}
+
 	// always convert to a string if string is required (regardless of the actual internal type)
 	std::vector<std::string> result { };
 	if(value->type->typeIndex == UA_TYPES_STRING) {
@@ -198,7 +201,7 @@ inline std::vector<std::string> Variant::getArrayValuesAs() const
 			std::string str( (const char*)uaStrArray[i].data, uaStrArray[i].length);
 			result.push_back( str );
 		}
-	} //TODO: should the other types also be converted to a string vector?
+	}
 	return result;
 }
 
@@ -208,8 +211,10 @@ std::vector<VALUE_TYPE> Variant::getArrayValuesAs() const
 {
 	static_assert(std::is_fundamental<VALUE_TYPE>::value,
 			                  "Value-Type has to be one of the fundamental types");
-	if(isScalar() || isEmpty()) {
+	if(isEmpty()) {
 		return std::vector<VALUE_TYPE>();
+	} else if(isScalar()) {
+		return std::vector<VALUE_TYPE>(1, getValueAs<VALUE_TYPE>());
 	}
 
 	std::vector<VALUE_TYPE> result(value->arrayLength);

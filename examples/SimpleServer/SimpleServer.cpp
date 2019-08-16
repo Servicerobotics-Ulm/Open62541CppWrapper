@@ -20,9 +20,9 @@ private:
 			const std::vector<OPCUA::Variant> &inputs,
 			std::vector<OPCUA::Variant> &outputs) override
 	{
-		std::cout << "CallMethod(" << browseName << ", ";
+		std::cout << "CallMethod(" << browseName << "; ";
 		for(size_t i=0; i<inputs.size(); ++i) {
-			std::cout << "input" << i << ": " << inputs[i] << ", ";
+			std::cout << "input" << i << ": " << inputs[i] << "; ";
 		}
 		std::cout << ")" << std::endl;
 
@@ -68,7 +68,8 @@ public:
 
 		// add a method
 		std::map<std::string, OPCUA::Variant> inputArguments;
-		inputArguments["IntInput1"] = 0;
+		std::vector<int> test(3,0);
+		inputArguments["IntInput1"] = test;
 		inputArguments["StringInput2"] = std::string("");
 
 		std::map<std::string, OPCUA::Variant> outputArguments;

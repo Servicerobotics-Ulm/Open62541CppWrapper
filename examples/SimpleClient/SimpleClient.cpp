@@ -63,7 +63,8 @@ int main(int argc, char* argv[])
 
 	// call a remote method at the sever
 	std::vector<OPCUA::Variant> inputArguments(2);
-	inputArguments[0] = 100;
+	std::vector<int> vect = {1, 2, 3};
+	inputArguments[0] = vect;
 	inputArguments[1] = std::string("Hello");
 	std::vector<OPCUA::Variant> outputArguments;
 	std::cout << "call method MyMethod: " << client.callMethod("MyMethod", inputArguments, outputArguments) << std::endl;

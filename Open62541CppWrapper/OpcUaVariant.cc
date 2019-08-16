@@ -91,50 +91,119 @@ bool Variant::isScalar() const
 
 std::string Variant::toString() const
 {
-	if(isEmpty() || !isScalar()) {
-		//TODO: implement to-string conversion for array types
+	if(isEmpty()) {
 		return std::string();
 	}
 
 	auto typeIndex = value->type->typeIndex;
-	if( typeIndex == UA_TYPES_BOOLEAN) {
-		auto boolValue = getValueAs<bool>();
-		if(boolValue == true) {
-			return std::string("true");
-		} else {
-			return std::string("false");
+	if(isScalar()) {
+		if( typeIndex == UA_TYPES_BOOLEAN) {
+			auto boolValue = getValueAs<bool>();
+			if(boolValue == true) {
+				return std::string("true");
+			} else {
+				return std::string("false");
+			}
+		} else if( typeIndex <= UA_TYPES_INT32 ) {
+			// all numeric types that fit into 32 bit
+			auto intValue = getValueAs<int>();
+			return std::to_string(intValue);
+		} else if( typeIndex == UA_TYPES_UINT32 ) {
+			auto uintValue = getValueAs<unsigned int>();
+			return std::to_string(uintValue);
+		} else if( typeIndex == UA_TYPES_INT64 ) {
+			auto intValue = getValueAs<long int>();
+			return std::to_string(intValue);
+		} else if( typeIndex == UA_TYPES_UINT64 ) {
+			auto uintValue = getValueAs<unsigned long int>();
+			return std::to_string(uintValue);
+		} else if( typeIndex <= UA_TYPES_DOUBLE ) {
+			// floating types
+			auto dblValue = getValueAs<double>();
+			return std::to_string(dblValue);
+		} else if(typeIndex == UA_TYPES_STRING) {
+			UA_String *uaStringPtr = static_cast<UA_String*>(value->data);
+			// reinterpret cast is quite a sledge hammer here
+			return std::string(reinterpret_cast<const char*>(uaStringPtr->data), uaStringPtr->length);
+		} else if(typeIndex == UA_TYPES_QUALIFIEDNAME) {
+			UA_QualifiedName *uaQname = static_cast<UA_QualifiedName*>(value->data);
+			std::string index= std::to_string(uaQname->namespaceIndex);
+			std::string simple_name(reinterpret_cast<const char*>(uaQname->name.data), uaQname->name.length);
+			return index + ":" + simple_name;
+		} else if(typeIndex == UA_TYPES_LOCALIZEDTEXT) {
+			UA_LocalizedText *uaText = static_cast<UA_LocalizedText*>(value->data);
+			// reinterpret cast is quite a sledge hammer here
+			return std::string(reinterpret_cast<const char*>(uaText->text.data), uaText->text.length);
 		}
-	} else if( typeIndex <= UA_TYPES_INT32 ) {
-		// all numeric types that fit into 32 bit
-		auto intValue = getValueAs<int>();
-		return std::to_string(intValue);
-	} else if( typeIndex == UA_TYPES_UINT32 ) {
-		auto uintValue = getValueAs<unsigned int>();
-		return std::to_string(uintValue);
-	} else if( typeIndex == UA_TYPES_INT64 ) {
-		auto intValue = getValueAs<long int>();
-		return std::to_string(intValue);
-	} else if( typeIndex == UA_TYPES_UINT64 ) {
-		auto uintValue = getValueAs<unsigned long int>();
-		return std::to_string(uintValue);
-	} else if( typeIndex <= UA_TYPES_DOUBLE ) {
-		// floating types
-		auto dblValue = getValueAs<double>();
-		return std::to_string(dblValue);
-	} else if(typeIndex == UA_TYPES_STRING) {
-		UA_String *uaStringPtr = static_cast<UA_String*>(value->data);
-		// reinterpret cast is quite a sledge hammer here
-		return std::string(reinterpret_cast<const char*>(uaStringPtr->data), uaStringPtr->length);
-	} else if(typeIndex == UA_TYPES_QUALIFIEDNAME) {
-		UA_QualifiedName *uaQname = static_cast<UA_QualifiedName*>(value->data);
-		std::string index= std::to_string(uaQname->namespaceIndex);
-		std::string simple_name(reinterpret_cast<const char*>(uaQname->name.data), uaQname->name.length);
-		return index + ":" + simple_name;
-	} else if(typeIndex == UA_TYPES_LOCALIZEDTEXT) {
-		UA_LocalizedText *uaText = static_cast<UA_LocalizedText*>(value->data);
-		// reinterpret cast is quite a sledge hammer here
-		return std::string(reinterpret_cast<const char*>(uaText->text.data), uaText->text.length);
+	} else {
+		// is array type
+		std::string result;
+		if( typeIndex == UA_TYPES_BOOLEAN) {
+			auto boolValues = getArrayValuesAs<bool>();
+			for(size_t i=0; i<boolValues.size(); ++i) {
+				if(boolValues[i] == true) {
+					result = result + std::string("true");
+				} else {
+					result = result + std::string("false");
+				}
+				if(i < boolValues.size()-1) {
+					result = result + ", ";
+				}
+			}
+		} else if( typeIndex <= UA_TYPES_INT32 ) {
+			// all numeric types that fit into 32 bit
+			auto intValues = getArrayValuesAs<int>();
+			for(auto &ival: intValues) {
+				result = result + std::to_string(ival);
+				if(&ival != &intValues.back()) {
+					result = result + ", ";
+				}
+			}
+		} else if( typeIndex == UA_TYPES_UINT32 ) {
+			auto uintValues = getArrayValuesAs<unsigned int>();
+			for(auto &uival: uintValues) {
+				result = result + std::to_string(uival);
+				if(&uival != &uintValues.back()) {
+					result = result + ", ";
+				}
+			}
+		} else if( typeIndex == UA_TYPES_INT64 ) {
+			auto intValues = getArrayValuesAs<long int>();
+			for(auto &ival: intValues) {
+				result = result + std::to_string(ival);
+				if(&ival != &intValues.back()) {
+					result = result + ", ";
+				}
+			}
+		} else if( typeIndex == UA_TYPES_UINT64 ) {
+			auto uintValues = getArrayValuesAs<unsigned long int>();
+			for(auto &uival: uintValues) {
+				result = result + std::to_string(uival);
+				if(&uival != &uintValues.back()) {
+					result = result + ", ";
+				}
+			}
+		} else if( typeIndex <= UA_TYPES_DOUBLE ) {
+			// floating types
+			auto dblValues = getArrayValuesAs<double>();
+			for(auto &dblval: dblValues) {
+				result = result + std::to_string(dblval);
+				if(&dblval != &dblValues.back()) {
+					result = result + ", ";
+				}
+			}
+		} else if(typeIndex == UA_TYPES_STRING) {
+			auto strValues = getArrayValuesAs<std::string>();
+			for(auto &str: strValues) {
+				result = result + str;
+				if(&str != &strValues.back()) {
+					result = result + ", ";
+				}
+			}
+		}
+		return result;
 	}
+
 	return std::string();
 }
 
