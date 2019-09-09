@@ -55,7 +55,7 @@ As example, we will use the [TrafficlightNS.xml](https://github.com/Servicerobot
 The tool can be executed e.g. in Ubuntu by opening a terminal and copy-pasting the following command:
 
 ```sh
-$ java -jar org.open62541.xml.compiler.v3.6.jar TrafficlightNS.xml ALL
+$ java -jar org.open62541.xml.compiler.v3.7.jar TrafficlightNS.xml ALL
 ```
 
 Please note the two additional parameters following the jar file in the command. The first parameter TrafficlightNS.xml is the XML file and should be replaced by your actual model. The last parameter specifies what has to be generated. Here are the supported options:
