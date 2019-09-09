@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 
-PROJECT(Open62541CppWrapper VERSION 1.0)
+PROJECT(Open62541CppWrapper VERSION 1.1)
 
 # find open62541 as the main dependency
 FIND_PACKAGE(open62541 1.0)
