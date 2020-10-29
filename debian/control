@@ -1,0 +1,26 @@
+Source: libopen62541cppwrapper
+Section: devel
+Priority: extra
+Maintainer: Service Robotics Research Center University of Applied Sciences Ulm <schlegel@hs-ulm.de>
+Build-Depends: debhelper, cmake, libopen62541-1-dev 
+Standards-Version: 3.9.3
+Homepage: http://www.servicerobotik-ulm.de/
+
+Package: libopen62541cppwrapper
+Architecture: any
+Section: libs
+Depends: libc6 (>=2.13), libgcc1 (>= 1:4.1.1), libstdc++6 (>=4.6), libopen62541-1
+Description:OPC UA Wrapper
+
+Package: libopen62541cppwrapper-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends: libopen62541cppwrapper (= ${binary:Version}), ${misc:Depends}
+Description: libopen62541cppwrapper dbg symbols
+
+Package: libopen62541cppwrapper-dev
+Architecture: any
+Section: libdevel
+Depends: libopen62541cppwrapper (= ${binary:Version})
+Description: libopen62541cppwrapper - devel files                   

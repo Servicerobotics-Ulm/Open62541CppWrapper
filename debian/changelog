@@ -1,0 +1,5 @@
+libopen62541cppwrapper (1.2) unstable; urgency=medium
+
+  * Initial release 
+
+ -- Alex Lotz <lotz@toolify.eu>  Thu, 29 Oct 2020 18:22:02 +0200
