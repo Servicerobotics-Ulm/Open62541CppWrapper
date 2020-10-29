@@ -761,9 +761,10 @@ OPCUA::StatusCode GenericClient::run_once() const
 	/* if already connected, this will return GOOD and do nothing */
 	/* if the connection is closed/errored, the connection will be reset and then reconnected */
 	/* Alternatively you can also use UA_Client_getState to get the current state */
-	UA_ClientState clientState = UA_Client_getState(client);
-	if(clientState != UA_CLIENTSTATE_SESSION) {
-		std::cerr << "client-state != UA_CLIENTSTATE_SESSION: " << clientState << std::endl;
+	UA_SessionState ss;
+	UA_Client_getState(client, NULL, &ss, NULL);
+	if(ss != UA_SESSIONSTATE_ACTIVATED) {
+		std::cerr << "client-state != UA_SESSIONSTATE_ACTIVATED: " << ss << std::endl;
 		/* The connect may timeout after 1 second (see above) or it may fail immediately on network errors */
 		/* E.g. name resolution errors or unreachable network. Thus there should be a small sleep here */
 		std::this_thread::sleep_for(minSubscriptionInterval);
