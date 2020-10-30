@@ -22,5 +22,5 @@ Description: libopen62541cppwrapper dbg symbols
 Package: libopen62541cppwrapper-dev
 Architecture: any
 Section: libdevel
-Depends: libopen62541cppwrapper (= ${binary:Version})
+Depends: libopen62541cppwrapper (= ${binary:Version}), libopen62541-1-dev
 Description: libopen62541cppwrapper - devel files                   
