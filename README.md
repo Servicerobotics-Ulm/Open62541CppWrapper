@@ -24,7 +24,7 @@ The Open62541CppWrapper mainly requires a preinstalled [open62541 C library](htt
 
 ## Installation instructions for the open62541 base library
 
-Since the Open62541 library version 1.2, the official Debian package of the open62541 C library can be used. The Debian package for the open62541 C library can be installed like this:
+Since the Open62541CppWrapper library **version 1.2**, the official Debian package of the open62541 C library can be used. The Debian package for the open62541 C library can be installed like this:
 
 ```sh
 $ sudo add-apt-repository ppa:open62541-team/ppa
