@@ -22,50 +22,17 @@ The Open62541CppWrapper mainly requires a preinstalled [open62541 C library](htt
 * A C++ compiler supporting the **C++ 14** standard
 * The [C++ **Standard Library** (STD)](https://en.cppreference.com/w/cpp/header)
 
-## Build instructions for the open62541 base library
+## Installation instructions for the open62541 base library
 
-Most recent and detailed instructions for building the **open62541** base library (for different operating systems) can be found in the original documentation at:
-
-* [https://open62541.org/doc/current/building.html](https://open62541.org/doc/current/building.html)
-
-The relevant parts for building the **open62541** base library as required for the **Open62541CppWrapper** library are summarized next. Please note, that the build instructions might become outdated when the original library evolves, so we recommend checking the original documentation in case of problems.
-
-The following instructions have been tested on **Ubuntu 18.04 x64**. In case you don't yet have installed the standard C++ build packages, you can do so by executing the following command in a bash terminal:
+Since the Open62541 library version 1.2, the official Debian package of the open62541 C library can be used. The Debian package for the open62541 C library can be installed like this:
 
 ```sh
-$ sudo apt-get install git build-essential g++ pkg-config cmake python python-six
+$ sudo add-apt-repository ppa:open62541-team/ppa
+$ sudo apt-get update
+$ sudo apt-get install libopen62541-1-dev
 ```
-![IMG01](images/01.png)
 
-Now you can clone the **open62541** base library by executing the following commands in a bash terminal (you can use any base folder of your choice):
-
-```sh
-$ git clone https://github.com/open62541/open62541.git
-$ cd open62541
-$ git checkout 1.0
-$ git submodule init
-$ git submodule update
-```
-![IMG02](images/02.png)
-
-For building the **open62541** base library, we use CMake and set some library-specific CMake options. Here are the relevant CMake options:
-
-* **UA_ENABLE_DISCOVERY_MULTICAST**
-* **BUILD_SHARED_LIBS**
-* optional: UA_BUILD_EXAMPLES
-
-The full list of build instructions in a bash terminal looks as follows:
-
-```sh
-$ mkdir -p build
-$ cd build
-$ cmake -DUA_BUILD_EXAMPLES=ON -DUA_ENABLE_DISCOVERY_MULTICAST=ON -DBUILD_SHARED_LIBS=ON ..
-$ make
-$ sudo make install
-```
-![IMG03](images/03.png)
-
-![IMG04](images/04.png)
+For further, more detailed instructions, please follow the official instructions at [https://open62541.org/](https://open62541.org/).
 
 ## Build instructions for the Open62541CppWrapper library
 
